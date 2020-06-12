@@ -9,7 +9,7 @@
 char* input(char *desc, ...) {
     size_t input_str_mem = _MEM_ * sizeof(char);
     char *input_str = (char *)malloc(input_str_mem);
-    int len = 0;
+    size_t len = 0;
 
     if (input_str == NULL) {
         printf("!!coution!! : buffers are lacked!\n");
@@ -27,7 +27,7 @@ char* input(char *desc, ...) {
     for (char c = getchar(); c != '\n' && c != EOF; c = getchar(), len++) {
         if (len+1 >= input_str_mem / sizeof(char)) {
             // input_str[len]にも'\0'が入るのでlen+1 == input_str_memのときメモリを取り直す必要がある
-            char *tmp = realloc(input_str, input_str_mem + _MEM_ * sizeof(char));
+            char *tmp = (char*)realloc(input_str, input_str_mem + _MEM_ * sizeof(char));
             // char *tmp = NULL; // デバッグ用
             if (tmp == NULL) {
                 printf("failed to malloc.\n");
